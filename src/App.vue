@@ -7,6 +7,7 @@
 
 <script>
 import Header from './components/home/home.vue'
+//import Aside from './components/home/aside.vue'
 
 export default {
   name: 'App',
@@ -17,6 +18,7 @@ export default {
   },
   components:{
       'app-header':Header
+      //'app-aside':Aside
   },
   methods:{
     public_header:function(bool){

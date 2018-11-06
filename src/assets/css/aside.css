@@ -1,8 +1,9 @@
 .login-box{
     width: 240px;
     height: auto;
-    padding: 5px 2px;
+    padding: 10px;
     background: #fff;
+    float: right;
 }
 
 .login-box input{

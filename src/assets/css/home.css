@@ -1,0 +1,88 @@
+.head-box{
+    width: 100%;
+    background: #fff;
+}
+
+.head{
+    width: 960px;
+    margin: 0 auto;
+    height: 60px;
+    line-height: 60px;
+    text-align: left;
+}
+
+.image-logo{
+    display: inline-block;
+    margin-right: 40px;
+    vertical-align: middle;
+    margin-bottom: 11px;
+}
+
+.head ul{
+    display: inline-block;
+    margin: 0px;
+}
+
+.head ul li{
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.head ul li a:hover{
+    color: #007fff;
+}
+
+.head a{
+    text-decoration: none;
+    color: #71777c;
+}
+
+.input-text{
+    border: 1px solid hsla(0,0%,59%,.2);
+    border-radius: 2px;
+    width: 156px;
+    height: 33px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+
+.input-text input{
+    border: none;
+    color: #666;
+    width: 120px;
+    height: 33px;
+    position: absolute;
+    padding: 0 0 0 5px;
+    outline: none;  
+}
+/* 取消Input自帶的点击变色效果 */
+.input-text input:focus{
+    outline: none;
+}
+
+.input-text img{
+    width: 22px;
+    height: 22px;
+    float: right;
+    margin: 7px 2px 0 0;
+}
+
+.input::-webkit-input-placeholder {
+    color:#999;
+}
+.input:-moz-placeholder {
+    color: #999;
+}
+.input:-ms-input-placeholder {
+    color: #999;
+}
+
+.active{
+    background: #fff;
+    border:1px solid #007fff;
+}
+
+.write-style{
+    color: #007fff;
+}

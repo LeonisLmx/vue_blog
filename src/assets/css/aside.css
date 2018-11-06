@@ -1,0 +1,16 @@
+.login-box{
+    width: 240px;
+    height: auto;
+    padding: 5px 2px;
+    background: #fff;
+}
+
+.login-box input{
+    border: 1px solid #f4f4f4;
+    margin-bottom: .4rem;
+}
+
+.login-box div{
+    margin-bottom: .4rem;
+}
+

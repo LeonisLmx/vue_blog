@@ -1,0 +1,133 @@
+.main{
+    background:#90979c; 
+    padding-top: 10px; 
+    min-height: 1080px;
+}
+
+.body{
+    margin: 0 auto;
+    width: 960px;
+    height: 100%;
+}
+
+.left-box{
+    width: 680px;
+    height: auto;
+    padding-left: 20px; 
+    background: #fff;
+    display: inline-block;
+    float: left;
+}
+
+.right-box{
+    width: 240px;
+    height: auto;
+    min-width: 240px;
+    background: #fff;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.hot-type{
+    height: 58px;
+    line-height: 58px;
+}
+
+.hot-type span{
+    display: inline-block;
+    margin-right: 40px;
+    height: 58px;
+    line-height: 58px;
+    float: left;
+}
+
+.hot-type ul{
+    display: inline-block;
+    margin: 0 auto;
+    font-size:14px;
+}
+
+.hot-type ul li{
+    list-style: none;
+    float: left;
+    margin-left: 20px;
+    cursor: pointer;
+    color: #90979c;
+}
+
+.active{
+    color: #007fff !important;
+}
+
+.article-body{
+    margin-bottom: 20px;
+}
+
+.each-article{
+    width: 652px;
+    height: 80px;
+}
+
+.each-article .line-tag{
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+    margin: 0 auto;
+    padding: 0px;
+    margin-bottom: 10px !important;
+}
+
+.each-article .line-tag li{
+    float: left;
+    list-style: none;
+    cursor: pointer;
+}
+
+.each-article .line-tag li a{
+    text-decoration: none;
+    color: #909090;
+}
+
+.each-article .line-tag li a:hover{
+    color: #007fff;
+}
+
+.each-article .line-tag li::after{
+    content: "\B7";
+    margin: 0 .4em;
+    color: #b2bac2;
+}
+
+.each-article .line-tag :last-child::after{
+    content: "";
+}
+
+.line-title a{
+    color: #2e3135;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.line-title a:hover{
+    text-decoration: underline;
+}
+
+.line-icon{
+    margin: 0 auto;
+    height: 24px;
+    line-height: 24px;
+    padding: 0px;
+    margin-top: 10px !important;
+}
+
+.zan-box,.comment-box{
+    border: 1px solid #edeeef;
+    float: left;
+    list-style: none;
+    padding: 2px 10px;
+}
+
+.zan,.comment{
+    cursor: pointer;
+    vertical-align: middle
+}

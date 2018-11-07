@@ -1,5 +1,5 @@
 .main{
-    background:#90979c; 
+    background:#fff; 
     padding-top: 10px; 
     min-height: 1080px;
 }
@@ -60,7 +60,7 @@
 }
 
 .article-body{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .each-article{
@@ -120,14 +120,39 @@
     margin-top: 10px !important;
 }
 
+.line-icon li{
+    list-style: none;
+    float: left;
+    font-size: 10px;
+    color: #b2bac2;
+    font-weight: 700;
+}
+
 .zan-box,.comment-box{
     border: 1px solid #edeeef;
-    float: left;
-    list-style: none;
     padding: 2px 10px;
 }
 
 .zan,.comment{
     cursor: pointer;
-    vertical-align: middle
+    vertical-align: middle;
+    margin-bottom: 4px;
+}
+
+.hide-line{
+    height: 30px;
+    line-height: 30px;
+}
+
+.hide-line img{
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.hot{
+    color: red !important;
+}
+
+.type{
+    color: #b71ed7 !important;
 }

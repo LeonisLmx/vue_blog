@@ -15,3 +15,111 @@
     margin-bottom: .4rem;
 }
 
+.first-title{
+    margin-bottom: .5rem;
+    font-size: 15px;
+    color: #2e3135;
+    font-weight: 600;
+}
+
+.second-titile{
+    margin-bottom: .5rem;
+    font-size: 14px;
+    color: #2e3135;
+}
+
+.third-title{
+    font-size: 14px;
+    color: #8f969c;
+    margin-bottom: 1rem;
+}
+
+.third-title span{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #007fff;
+}
+
+input{
+    height: 30px;
+    line-height: 30px;
+    padding: 5px;
+}
+
+button{
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    background: #007fff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background: #0371df;
+    color: #fff;
+}
+
+.other-login span{
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    color: #8f969c;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.other-login img{
+    height: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.hot-tag{
+    width: 240px;
+    height: auto;
+    padding: 10px;
+    background: #fff;
+    float: right;
+    font-size: 14px;
+}
+
+.view-all{
+    float: right;
+    display: inline-block;
+    cursor: pointer;
+    color: #007fff;
+}
+
+.hot-tag ul{
+    padding: 0;
+}
+
+.hot-tag li{
+    list-style: none;
+    float: left;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.hot-tag li a{
+    padding:0 20px;
+    display: inline-block;
+    min-width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    background: #f3f6f3;
+    color: black;
+    text-align: center;
+    margin-right: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.hot-tag li a:hover{
+    background: #0c0;
+    color: #fff;
+}

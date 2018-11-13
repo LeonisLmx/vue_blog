@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/components/home/home'
 import index from '@/components/group/index'
-import test from '@/components/home/aside'
+import test from '@/components/group/article_detail'
 
 Vue.use(Router)
 

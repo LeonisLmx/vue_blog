@@ -106,6 +106,8 @@
     color: #2e3135;
     text-decoration: none;
     font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .line-title a:hover{

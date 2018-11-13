@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="scroll">
     <div class="head-box">
       <div class="head">
           <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" class="image-logo">
@@ -9,7 +9,6 @@
             <li><a href="#">小册</a></li>
             <li><a href="#">开源库</a></li>
             <li><a href="#">活动</a></li>
-            <li><a href="#"><img src="https://conf.juejin.im/2018/mini-programs"></a></li>
             <li class="input-text">
               <img src="../../assets/image/search.svg"><input type="text" placeholder="搜索掘金" @click="searchInput()">
             </li>

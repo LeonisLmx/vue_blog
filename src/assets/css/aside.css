@@ -91,6 +91,7 @@ button:hover{
     display: inline-block;
     cursor: pointer;
     color: #007fff;
+    text-decoration: none;
 }
 
 .hot-tag ul{

@@ -19,13 +19,13 @@
                 <div class="article-body" v-for="list in lists">
                     <div class="each-article">
                         <ul class="line-tag">
-                            <li v-if="list.hot != ''"><a :href=list.articleUrl class="hot" target="_blank">{{list.hot}}</a></li>
-                            <li v-if="list.type != ''"><a :href=list.articleUrl class="type" target="_blank">{{list.type}}</a></li>
-                            <li><a :href=list.authorUrl target="_blank">{{list.author}}</a></li>
-                            <li><a :href=list.articleUrl target="_blank">{{list.time}}</a></li>
+                            <li v-if="list.hot != ''"><a :href=list.article_url class="hot" target="_blank">{{list.hot}}</a></li>
+                            <li v-if="list.type != ''"><a :href=list.article_url class="type" target="_blank">{{list.type}}</a></li>
+                            <li><a :href=list.author_url target="_blank">{{list.author}}</a></li>
+                            <li><a :href=list.article_url target="_blank">{{list.time}}</a></li>
                             <li v-for="entity in list.tags"><a :href="'https://juejin.im/tag/' + entity">{{entity}}</a></li>
                         </ul>
-                        <div class="line-title"><a :href=list.articleUrl target="_blank">{{list.title}}</a></div>
+                        <div class="line-title"><a :href=list.article_url target="_blank">{{list.title}}</a></div>
                         <ul class="line-icon">
                             <li class="zan-box" @mouseenter="enter()" @mouseleave="leave()">
                                 <img class="zan" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTAgMGgxNnYxNkgweiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNCMkJBQzIiIGQ9Ik00LjIzNCA2LjY5M3Y3LjI0M0gyLjg4MWMtLjQ4NiAwLS44ODEtLjQ5Mi0uODgxLTEuMDk1VjcuODc1YzAtLjYzLjQxMi0xLjE4Mi44OC0xLjE4MmgxLjM1NHptMy42ODgtMy43QzguMDEgMi40MDQgOC40OSAxLjk5IDkuMDE4IDJjLjc1NC4wMTUgMS4yMDQuNjYzIDEuMzYuOTgzLjI4NC41ODUuMjkyIDEuNTQ5LjA5NyAyLjE2Ny0uMTc3LjU2LS41ODYgMS4yOTYtLjU4NiAxLjI5NmgzLjA2NmMuMzI0IDAgLjYyNS4xNjQuODI2LjQ0OS4yMDQuMjkuMjcuNjY4LjE3OCAxLjAxMWwtMS4zODcgNS4xODNjLS4xMjYuNDk5LS41NDQuODQ3LTEuMDE2Ljg0N0g1LjUzVjYuNjkzYzEuMzg1LS4zMDkgMi4yMzYtMi42MzIgMi4zOTItMy43eiIvPgogICAgPC9nPgo8L3N2Zz4K" alt="点赞">
@@ -79,10 +79,12 @@ export default {
   },
    mounted(){
     const _this = this;
+    console.log(url);
     window.addEventListener('scroll', _this.handleScroll,true)
     $.ajax({
-        url:'http://localhost:8888/user/getList?pageNum=' + _this.page,
+        url: url + '/user/getList?pageNum=' + _this.page,
         success:function(data){
+            console.log(data);
             _this.lists = data.body.list;
         }
     })
@@ -100,7 +102,7 @@ export default {
          if(document.documentElement.scrollHeight-document.documentElement.scrollTop-document.documentElement.clientHeight < 2){
              _this.page = _this.page + 1;
              $.ajax({
-                  url:'http://localhost:8888/user/getList?pageNum=' + _this.page,
+                  url: url + '/user/getList?pageNum=' + _this.page,
                   success:function(data){
                     _this.lists = _this.lists.concat(data.body.list);
                 }

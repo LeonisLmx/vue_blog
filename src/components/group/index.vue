@@ -5,15 +5,9 @@
                 <div class="hot-type">
                     <span>热门文章</span>
                     <ul>
-                        <li class="active">推荐</li>
-                        <li>前端</li>
-                        <li>Android</li>
-                        <li>后端</li>
-                        <li>人工智能</li>
-                        <li>IOS</li>
-                        <li>工具资源</li>
-                        <li>阅读</li>
-                        <li>运维</li>
+                        <li v-bind:class="index==1 ? 'active' : ''" @click="search()">全部</li>
+                        <li v-bind:class="index==2 ? 'active' : ''" @click="search(-1)">爬取</li>
+                        <li v-bind:class="index==3 ? 'active' : ''" @click="search(1)">原创</li>
                     </ul>
                 </div>
                 <div class="article-body" v-for="list in lists">
@@ -70,7 +64,9 @@ export default {
             //     authorUrl: "https://juejin.im/user/557e5397e4b078e61fe6cb88"
             // }
         ],
-      page: 1
+      page: 1,
+      isOrigin: '',
+      index: 1
     }
   },
   components:{
@@ -78,12 +74,10 @@ export default {
   },
    mounted(){
     const _this = this;
-    console.log(url);
     window.addEventListener('scroll', _this.handleScroll,true)
     $.ajax({
         url: url + '/user/getList?pageNum=' + _this.page,
         success:function(data){
-            console.log(data);
              for(var i=0;i<data.body.list.length;i++){
                 data.body.list[i].show = false;
             }
@@ -104,12 +98,34 @@ export default {
          if(document.documentElement.scrollHeight-document.documentElement.scrollTop-document.documentElement.clientHeight < 2){
              _this.page = _this.page + 1;
              $.ajax({
-                  url: url + '/user/getList?pageNum=' + _this.page,
+                  url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin,
                   success:function(data){
                     _this.lists = _this.lists.concat(data.body.list);
                 }
-        })
+            })
          }
+     },
+     search:function(obj){
+         var _this = this;
+         if(obj == undefined){
+            obj = '';   
+            _this.index = 1;
+         }else if(obj == '-1'){
+             _this.index = 2;
+         }else if(obj == '1'){
+             _this.index = 3;
+         }
+        _this.page = 1;
+        _this.isOrigin = obj;
+        $.ajax({
+        url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin,
+        success:function(data){
+             for(var i=0;i<data.body.list.length;i++){
+                data.body.list[i].show = false;
+                }
+            _this.lists = data.body.list;
+            }
+        }) 
      }
   }
 }

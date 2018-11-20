@@ -73,7 +73,7 @@ export default {
   components:{
       'app-aside':Aside
   },
-   mounted(){
+  mounted(){
     const _this = this;
     window.addEventListener('scroll', _this.handleScroll,true)
     $.ajax({
@@ -89,15 +89,21 @@ export default {
     _this.$root.eventHub.$on('search_article', (yourData)=>{
         _this.text = yourData;
         $.ajax({
-                  url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin + '&text=' + yourData,
-                  success:function(data){
+                    url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin + '&text=' + yourData,
+                    success:function(data){
                         for(var i=0;i<data.body.list.length;i++){
                             data.body.list[i].show = false;
                             }
                         _this.lists = data.body.list;
                 }
         })
-    } )
+    }),
+    // 因为dom树是后期渲染出来的，所以做个延时加载
+    setTimeout(function(){
+        $("body .line-icon img").click(function(){
+            window.alert("未登录不能点赞或者留言")
+        })
+    },1000)
   },
   methods: {
      enter: function(obj) {
@@ -142,7 +148,7 @@ export default {
         }) 
      }
   }
-}
+};
 </script>
 
 <style>

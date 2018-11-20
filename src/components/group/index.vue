@@ -66,7 +66,8 @@ export default {
         ],
       page: 1,
       isOrigin: '',
-      index: 1
+      index: 1,
+      text: ''
     }
   },
   components:{
@@ -76,14 +77,27 @@ export default {
     const _this = this;
     window.addEventListener('scroll', _this.handleScroll,true)
     $.ajax({
-        url: url + '/user/getList?pageNum=' + _this.page,
+        url: url + '/user/getList?pageNum=' + _this.page + '&text=' + _this.text,
         success:function(data){
-             for(var i=0;i<data.body.list.length;i++){
+            for(var i=0;i<data.body.list.length;i++){
                 data.body.list[i].show = false;
             }
             _this.lists = data.body.list;
         }
-    })
+    }),
+    // 接受发射的 search 事件
+    _this.$root.eventHub.$on('search_article', (yourData)=>{
+        _this.text = yourData;
+        $.ajax({
+                  url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin + '&text=' + yourData,
+                  success:function(data){
+                        for(var i=0;i<data.body.list.length;i++){
+                            data.body.list[i].show = false;
+                            }
+                        _this.lists = data.body.list;
+                }
+        })
+    } )
   },
   methods: {
      enter: function(obj) {
@@ -98,7 +112,7 @@ export default {
          if(document.documentElement.scrollHeight-document.documentElement.scrollTop-document.documentElement.clientHeight < 2){
              _this.page = _this.page + 1;
              $.ajax({
-                  url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin,
+                  url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin + '&text=' + _this.text,
                   success:function(data){
                     _this.lists = _this.lists.concat(data.body.list);
                 }
@@ -118,7 +132,7 @@ export default {
         _this.page = 1;
         _this.isOrigin = obj;
         $.ajax({
-        url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin,
+        url: url + '/user/getList?pageNum=' + _this.page + '&isOrigin=' + _this.isOrigin + '&text=' + _this.text,
         success:function(data){
              for(var i=0;i<data.body.list.length;i++){
                 data.body.list[i].show = false;

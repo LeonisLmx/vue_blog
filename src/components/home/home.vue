@@ -10,7 +10,7 @@
             <li><a href="#">开源库</a></li>
             <li><a href="#">活动</a></li>
             <li class="input-text">
-              <img src="../../assets/image/search.svg"><input type="text" placeholder="搜索掘金" @click="searchInput()">
+              <img src="../../assets/image/search.svg" @click="searchArticle()"><input type="text" placeholder="搜索掘金" @click="searchInput()" class="input_val">
             </li>
             <li class="write-style">
                 <img src="../../assets/image/book.svg" alt="book" style="vertical-align:middle">
@@ -47,8 +47,21 @@ export default {
   },
   methods:{
       searchInput:function(){
-        $("input-text input")
+        // $("input-text input")
         $(".input-text").addClass("active");
+      },
+      searchArticle:function(){
+        this.$root.eventHub.$emit('search_article',$(".input_val").val())
+    //     $.ajax({
+    //     url: url + '/user/getList?pageNum=1&text=' + $(".input_val").val(),
+    //     success:function(data){
+    //          for(var i=0;i<data.body.list.length;i++){
+    //             data.body.list[i].show = false;
+    //         }
+    //         window.obj = data.body.list;
+    //         console.log(window.obj);
+    //     }
+    // })
       }
   }
 }

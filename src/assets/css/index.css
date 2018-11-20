@@ -12,6 +12,7 @@
 
 .left-box{
     width: 680px;
+    min-height: 700px;
     height: auto;
     padding-left: 20px; 
     background: #fff;

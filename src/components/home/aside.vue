@@ -16,6 +16,11 @@
             <li v-for="entity in list"><a :href="'https://juejin.im/tag/' + entity" target="_blank">{{entity}}</a></li>
           </ul>
       </div>
+      <div class="mail-box">
+          <textarea class="guess_notice"  name="notice" placeholder="请留下你的宝贵意见,如有需要，我会第一时间联系您" id="" style="width:90%;height:60px;padding:5px;margin-bottom:10px"></textarea>
+          <input class="guess_email" type="text" placeholder="您的邮箱或者电话" style="width:90%;height:20px;line-height:20px">
+          <div style="width:100%;text-align:center;margin:10px auto"><button @click="sendNotice()" style="width:50%;margin:0 auto">发送通知</button></div>
+      </div>
     </div>
 </template>
 <script>
@@ -29,7 +34,9 @@ export default {
         ["算法","GitHub"],
         ["面试","代码规范"],
         ["产品","掘金翻译计划"]
-      ]
+      ],
+      flag: true,
+      num: 0
     }
   },
   mounted(){
@@ -40,7 +47,39 @@ export default {
   methods:{
     noButton:function(){
         window.alert("该功能还未开放");
+      },
+    sendNotice:function(){
+      var _this = this;
+      _this.setTimeInterval();
+      if(_this.flag){
+        if($(".guess_notice").val() == '' || $(".guess_notice").val() == undefined){
+          _this.flag = false;
+          window.alert("意见不能为空喔。");
+          return;
+        }
+        _this.flag = false;
+        var content = $(".guess_notice").val() + "</br>" + $(".guess_email").val()
+        $.ajax({
+                url: url + '/user/sendEmail?content=' + content,
+                success:function(data){
+                if(data){
+                  window.alert("发送成功了,感谢你的宝贵建议");
+                }
+            }
+        })
       }
+    },
+    setTimeInterval:function(){
+      var _this = this;
+      setTimeout(function(){
+          _this.flag = true;
+          _this.num = 0;
+      },5000)
+      _this.num++;
+      if(_this.num >= 2){
+        window.alert("5秒之内不能重复点击")
+      }
+    }
   }
 }
 </script>

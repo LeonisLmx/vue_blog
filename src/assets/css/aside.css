@@ -124,3 +124,12 @@ button:hover{
     background: #0c0;
     color: #fff;
 }
+
+.mail-box{
+    width: 240px;
+    height: auto;
+    padding: 10px;
+    background: #fff;
+    float: right;
+    font-size: 12px;
+}

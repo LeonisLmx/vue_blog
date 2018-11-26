@@ -17,7 +17,8 @@
           </ul>
       </div>
       <div class="mail-box">
-          <textarea class="guess_notice"  name="notice" placeholder="请留下你的宝贵意见,如有需要，我会第一时间联系您" id="" style="width:90%;height:60px;padding:5px;margin-bottom:10px"></textarea>
+          <textarea class="guess_notice"  name="notice" placeholder="请留下你的宝贵意见,如有需要，我会第一时间联系您" id="" style="width:90%;height:60px;padding:5px;margin-bottom:10px" maxlength="255"></textarea>
+          <div class="advice-tips">意见不能为空噢。</div>
           <input class="guess_email" type="text" placeholder="您的邮箱或者电话" style="width:90%;height:20px;line-height:20px">
           <div style="width:100%;text-align:center;margin:10px auto"><button @click="sendNotice()" style="width:50%;margin:0 auto">发送通知</button></div>
       </div>
@@ -42,6 +43,13 @@ export default {
   mounted(){
     $(".other-login img").click(function(){
         window.alert("该功能还未开放");
+    }),
+    // 对应取消input边框
+    document.addEventListener('click',function(e){
+       if(e.target.nodeName == 'TEXTAREA'){
+          $(".guess_notice").css("margin-bottom","10px");
+          $(".advice-tips").hide();
+       }
     })
   },
   methods:{
@@ -54,7 +62,8 @@ export default {
       if(_this.flag){
         if($(".guess_notice").val() == '' || $(".guess_notice").val() == undefined){
           _this.flag = false;
-          window.alert("意见不能为空喔。");
+          $(".guess_notice").css("margin-bottom","0px");
+          $(".advice-tips").show();
           return;
         }
         _this.flag = false;
@@ -62,8 +71,11 @@ export default {
         $.ajax({
                 url: url + '/user/sendEmail?content=' + content,
                 success:function(data){
-                if(data){
+                  console.log(data)
+                if(data.body){
                   window.alert("发送成功了,感谢你的宝贵建议");
+                }else{
+                  window.alert("很抱歉，同一IP地址请5分钟以后再试");
                 }
             }
         })

@@ -133,3 +133,9 @@ button:hover{
     float: right;
     font-size: 12px;
 }
+
+.advice-tips{
+    display: none;
+    color: red;
+    margin-bottom: 10px;
+}

@@ -73,11 +73,16 @@ export default {
   components:{
       'app-aside':Aside
   },
+  created(){
+      var _this = this
+      _this.isOrigin = _this.$route.query.isOrigin==1?1:''
+      _this.index = 3
+  },
   mounted(){
     const _this = this;
     window.addEventListener('scroll', _this.handleScroll,true)
     $.ajax({
-        url: url + '/user/getList?pageNum=' + _this.page + '&text=' + _this.text,
+        url: url + '/user/getList?pageNum=' + _this.page + '&text=' + _this.text + '&isOrigin=' + _this.isOrigin,
         success:function(data){
             for(var i=0;i<data.body.list.length;i++){
                 data.body.list[i].show = false;

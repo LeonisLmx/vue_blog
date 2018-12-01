@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "jquery": "^3.3.1",
+<<<<<<< HEAD
     "package.json": "^2.0.1",
+=======
+    "showdown": "^1.8.7",
+>>>>>>> 27b7d3cc1232a7868182f0fd046755d94c8c2997
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

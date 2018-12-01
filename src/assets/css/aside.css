@@ -91,6 +91,7 @@ button:hover{
     display: inline-block;
     cursor: pointer;
     color: #007fff;
+    text-decoration: none;
 }
 
 .hot-tag ul{
@@ -122,4 +123,19 @@ button:hover{
 .hot-tag li a:hover{
     background: #0c0;
     color: #fff;
+}
+
+.mail-box{
+    width: 240px;
+    height: auto;
+    padding: 10px;
+    background: #fff;
+    float: right;
+    font-size: 12px;
+}
+
+.advice-tips{
+    display: none;
+    color: red;
+    margin-bottom: 10px;
 }

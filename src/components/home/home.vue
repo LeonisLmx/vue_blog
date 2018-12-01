@@ -1,24 +1,23 @@
 <template>
-  <div>
+  <div id="scroll">
     <div class="head-box">
       <div class="head">
           <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" class="image-logo">
           <ul>
             <li><a href="#">首页</a></li>
-            <li><a href="#">沸点</a></li>
-            <li><a href="#">小册</a></li>
-            <li><a href="#">开源库</a></li>
-            <li><a href="#">活动</a></li>
-            <li><a href="#"><img src="https://conf.juejin.im/2018/mini-programs"></a></li>
+            <li><a href="https://juejin.im/activities" target="_blank">动态</a></li>
+            <li><a href="https://juejin.im/books" target="_blank">小册</a></li>
+            <li><a href="https://juejin.im/repos" target="_blank">开源库</a></li>
+            <li><a href="https://juejin.im/events/all" target="_blank">活动</a></li>
             <li class="input-text">
-              <img src="../../assets/image/search.svg"><input type="text" placeholder="搜索掘金" @click="searchInput()">
+              <img src="../../assets/image/search.svg" @click="searchArticle()"><input type="text" placeholder="搜索本站" @click="searchInput()" class="input_val">
             </li>
             <li class="write-style">
                 <img src="../../assets/image/book.svg" alt="book" style="vertical-align:middle">
-                <span style="display:inline-block;margin-left:-4px">写文章</span>
+                <a style="display:inline-block;margin-left:-4px;color:#007fff" href="https://mp.csdn.net/postedit" target="_blank">写文章</a>
             </li>
             |
-            <li style="color:#007fff">
+            <li style="color:#007fff" @click="noButton()">
               <span>登录</span>
               ·
               <span>注册</span>
@@ -48,8 +47,15 @@ export default {
   },
   methods:{
       searchInput:function(){
-        $("input-text input")
+        // $("input-text input")
         $(".input-text").addClass("active");
+      },
+      searchArticle:function(){
+        // 事件发射，搜索方法
+        this.$root.eventHub.$emit('search_article',$(".input_val").val())
+      },
+      noButton:function(){
+        window.alert("该功能还未开放");
       }
   }
 }

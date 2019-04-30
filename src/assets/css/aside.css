@@ -139,3 +139,47 @@ button:hover{
     color: red;
     margin-bottom: 10px;
 }
+
+.order-ranking{
+    position: fixed;
+    right: 50px;
+    width: 240px;
+    height: auto;
+    padding: 10px;
+    font-size: 12px
+}
+
+.rank-title{
+    color: #007fff;
+    font-size: 20px;
+    margin-bottom: 10px
+}
+
+.list-rank a{
+    display: block;
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black
+}
+
+.list-rank a:nth-child(1) {
+    color: gold !important;
+}
+
+.list-rank a:nth-child(2) {
+    color: silver !important
+}
+
+.list-rank a:nth-child(3) {
+    color: RGB(198,145,69) !important
+}
+
+.to_top{
+    color: #007fff;
+    margin: 0 auto;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 20px;
+}

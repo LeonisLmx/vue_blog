@@ -2,13 +2,9 @@
   <div class="main">
     <div class="body">
       <div class="left-box">
-        <div class="hot-type">
-          <span>热门文章</span>
-          <ul>
-            <li v-bind:class="index==1 ? 'active' : ''" @click="search()">全部</li>
-            <li v-bind:class="index==2 ? 'active' : ''" @click="search(-1)">爬取</li>
-            <li v-bind:class="index==3 ? 'active' : ''" @click="search(1)">原创</li>
-          </ul>
+        <div class="author-box">
+          <a :href="href" target="_blank" class="author_url">{{author}}</a>
+          <span>{{currentNumber}}/{{count}}条</span>
         </div>
         <div class="article-body" v-for="list in lists">
           <div class="each-article">
@@ -70,97 +66,60 @@
     </div>
   </div>
 </template>
-
 <script>
 import Aside from "../home/aside.vue";
+import { fail } from "assert";
+import { truncate } from "fs";
 export default {
   name: "App",
   data() {
     return {
       lists: [
-        // {
-        //     hot: "热",
-        //     type: "",
-        //     author: "渔人码头",
-        //     time: "7小时前",
-        //     tags: ["JavaScript"],
-        //     title: "ES2018（ES9） 带来的重大新特性 – JavaScript 完全手册（2018版）",
-        //     goodNum: "87",
-        //     messageNum: "22",
-        //     articleUrl: "https://juejin.im/entry/5be2243451882516c713cda4",
-        //     authorUrl: "https://juejin.im/user/557e5397e4b078e61fe6cb88"
-        // }
+        {
+          hot: "热",
+          type: "",
+          author: "渔人码头",
+          time: "7小时前",
+          tags: ["JavaScript"],
+          title:
+            "ES2018（ES9） 带来的重大新特性 – JavaScript 完全手册（2018版）",
+          goodNum: "87",
+          messageNum: "22",
+          articleUrl: "https://juejin.im/entry/5be2243451882516c713cda4",
+          authorUrl: "https://juejin.im/user/557e5397e4b078e61fe6cb88"
+        }
       ],
-      page: 1,
-      isOrigin: "",
+      author: "石衫的架构笔记",
       index: 1,
-      text: "",
+      count: 0,
+      currentNumber: 20,
+      page: 1,
       flag: false,
-      total: 0
+      href: ""
     };
   },
   components: {
     "app-aside": Aside
   },
   created() {
-    var _this = this;
-    _this.isOrigin = _this.$route.query.isOrigin == 1 ? 1 : "";
-    _this.index = _this.$route.query.isOrigin == 1 ? 3 : 1;
+    this.author = this.$route.query.author;
   },
   mounted() {
-    const _this = this;
+    let _this = this;
     window.addEventListener("scroll", _this.handleScroll, true);
     $.ajax({
-      url:
-        url +
-        "/user/getList?pageNum=" +
-        _this.page +
-        "&text=" +
-        _this.text +
-        "&isOrigin=" +
-        _this.isOrigin,
+      url: url + "/article/to_author?pageNumer=1&author=" + _this.author,
       success: function(data) {
-        for (var i = 0; i < data.body.list.length; i++) {
-          data.body.list[i].show = false;
-        }
+        console.log(data);
         _this.lists = data.body.list;
-        _this.total = data.body.total;
+        _this.count = data.body.count;
+        _this.currentNumber = data.body.current;
+        _this.href = _this.lists[0].author_url;
+        console.log(_this.href)
       }
-    }),
-      // 接受发射的 search 事件
-      _this.$root.eventHub.$on("search_article", yourData => {
-        _this.text = yourData;
-        $.ajax({
-          url:
-            url +
-            "/user/getList?pageNum=" +
-            _this.page +
-            "&isOrigin=" +
-            _this.isOrigin +
-            "&text=" +
-            yourData,
-          success: function(data) {
-            for (var i = 0; i < data.body.list.length; i++) {
-              data.body.list[i].show = false;
-            }
-            _this.lists = data.body.list;
-          }
-        });
-      }),
-      // 因为dom树是后期渲染出来的，所以做个延时加载
-      setTimeout(function() {
-        $("body .line-icon img").click(function() {
-          window.alert("未登录不能点赞或者留言");
-        });
-      }, 1000);
+    });
   },
   methods: {
-    enter: function(obj) {
-      obj.show = true;
-    },
-    leave: function(obj) {
-      obj.show = false;
-    },
     handleScroll: function() {
       var _this = this;
       // 滚动条距离底部小于2的时候触发ajax
@@ -170,54 +129,26 @@ export default {
           document.documentElement.clientHeight <
         2
       ) {
-        if (_this.page * 20 >= _this.count) {
+        _this.flag = false;
+        _this.page = _this.page + 1;
+        if (_this.currentNumber + 20 >= _this.count) {
           _this.flag = true;
         } else {
-          _this.page = _this.page + 1;
           $.ajax({
             url:
               url +
-              "/user/getList?pageNum=" +
+              "/article/to_author?pageNumer=" +
               _this.page +
-              "&isOrigin=" +
-              _this.isOrigin +
-              "&text=" +
-              _this.text,
+              "&author=" +
+              _this.author,
             success: function(data) {
               _this.lists = _this.lists.concat(data.body.list);
+              _this.count = data.body.count;
+              _this.currentNumber = data.body.current;
             }
           });
         }
       }
-    },
-    search: function(obj) {
-      var _this = this;
-      if (obj == undefined) {
-        obj = "";
-        _this.index = 1;
-      } else if (obj == "-1") {
-        _this.index = 2;
-      } else if (obj == "1") {
-        _this.index = 3;
-      }
-      _this.page = 1;
-      _this.isOrigin = obj;
-      $.ajax({
-        url:
-          url +
-          "/user/getList?pageNum=" +
-          _this.page +
-          "&isOrigin=" +
-          _this.isOrigin +
-          "&text=" +
-          _this.text,
-        success: function(data) {
-          for (var i = 0; i < data.body.list.length; i++) {
-            data.body.list[i].show = false;
-          }
-          _this.lists = data.body.list;
-        }
-      });
     },
     toTop: function() {
       window.scroll(0, 0);
@@ -225,6 +156,22 @@ export default {
   }
 };
 </script>
-
 <style>
+.author-box {
+  line-height: 20px;
+  font-size: 16px;
+  color: #007fff;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.author-box span {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.author_url{
+    text-decoration: none;
+    color: #007fff
+}
 </style>

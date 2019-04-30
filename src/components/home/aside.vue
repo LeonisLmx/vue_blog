@@ -22,6 +22,13 @@
           <input class="guess_email" type="text" placeholder="您的邮箱或者电话" style="width:90%;height:20px;line-height:20px">
           <div style="width:100%;text-align:center;margin:10px auto"><button @click="sendNotice()" style="width:50%;margin:0 auto">发送通知</button></div>
       </div>
+      <div class="order-ranking">
+          <div class="rank-title">文章发布排行榜</div>
+          <div class="list-rank">
+              <a v-for="entity,i in rankList" :href="'/#/author?author=' + entity" target="_blank">{{i + 1}} {{entity}}</a>
+          </div>
+          <div class="tips">PS:<br>本排名只是针对本网站的数据拉取，仅供娱乐参考😄</div>
+      </div>
     </div>
 </template>
 <script>
@@ -36,11 +43,19 @@ export default {
         ["面试","代码规范"],
         ["产品","掘金翻译计划"]
       ],
+      rankList: [
+          "liumingxin",
+          "liumingxin",
+          "liumingxin",
+          "liumingxin",
+          "liumingxin"
+      ],
       flag: true,
       num: 0
     }
   },
   mounted(){
+    var _this = this;
     $(".other-login img").click(function(){
         window.alert("该功能还未开放");
     }),
@@ -50,7 +65,13 @@ export default {
           $(".guess_notice").css("margin-bottom","10px");
           $(".advice-tips").hide();
        }
-    })
+    }),
+    $.ajax({
+        url: url + '/article/giveLike?start=0&end=9&index=-1',
+        success:function(data){
+            _this.rankList = data.body;
+        }
+      })
   },
   methods:{
     noButton:function(){
@@ -97,5 +118,10 @@ export default {
 </script>
 <style>
 @import '../../assets/css/aside.css';
+
+  .tips{
+    color: red;
+    margin-top: 20px
+  }
 </style>
                 

@@ -4,7 +4,7 @@
       <div class="head">
           <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" class="image-logo">
           <ul>
-            <li><a href="#">首页</a></li>
+            <li><a href="/#/">首页</a></li>
             <li><a href="https://juejin.im/activities" target="_blank">动态</a></li>
             <li><a href="https://juejin.im/books" target="_blank">小册</a></li>
             <li><a href="https://juejin.im/repos" target="_blank">开源库</a></li>

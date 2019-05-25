@@ -106,6 +106,31 @@ export default {
     var _this = this;
     _this.isOrigin = _this.$route.query.isOrigin == 1 ? 1 : "";
     _this.index = _this.$route.query.isOrigin == 1 ? 3 : 1;
+    $.ajax({
+      url: url + "/user/get_address",
+      success: function(data) {
+        if (data.body.flag) {
+          var message = data.body.message;
+          if (data.body.near.length > 0) {
+            message = message + "\n以下结果仅供参考娱乐";
+            message = message + "\n您附近有以下IP也访问过噢！";
+          }
+          for (var i = 0; i < data.body.near.length; i++) {
+            var element = data.body.near[i];
+            message =
+              message +
+              "\n" +
+              element.split("_")[0] +
+              "   " +
+              element.split("_")[1];
+          }
+          // data.body.near.array.forEach(element => {
+          //    message = message + "\r\n" + element.split("_")[0] + "   " + element.split("_")[1];
+          // });
+          alert(message);
+        }
+      }
+    });
   },
   mounted() {
     const _this = this;
